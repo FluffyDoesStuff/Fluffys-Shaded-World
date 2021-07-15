@@ -29,7 +29,7 @@ const int colortex2Format = RGB16;
 */
 
 const float sunPathRotation = -40.0f;
-const int shadowMapResolution = 2048; //[512 1024 2048 4096]
+const int shadowMapResolution = 1024; //[128 256 512 1024 2048 4096 8192 16384]
 const int noiseTextureResolution = 64;
 
 const float Ambient = 0.3f;
