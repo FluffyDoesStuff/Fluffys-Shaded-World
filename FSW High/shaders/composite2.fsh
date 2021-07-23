@@ -5,7 +5,7 @@ in vec2 textureCoordinates;
 uniform sampler2D gcolor;
 uniform sampler2D depthtex0;
 uniform sampler2D gnormal;
-uniform sampler2D colortex2;
+uniform sampler2D colortex5;
 
 uniform mat4 gbufferProjection;
 uniform mat4 gbufferProjectionInverse;
@@ -37,8 +37,8 @@ vec3 raytraceScreen(vec3 screenPosition, vec3 localNormal) {
     vec3 currentPosition = mix(startPosition, endPosition, pow(currentStep, 1.0));
     vec3 screenQuery     = localToScreen(currentPosition);
     vec3 localQuery      = screenToLocal(vec3(screenQuery.xy, texture2D(depthtex0, screenQuery.xy)));
-    if (screenQuery.x < 0.0 || screenQuery.y < 0.0 || screenQuery.x > 1.0 || screenQuery.y > 1.0)
-      break;
+    if (screenQuery.xy != clamp(screenQuery.xy, vec2(0.0), vec2(1.0)))
+    break;
 
     if ((currentPosition.z - localQuery.z) <= 0.0) {
       result = currentPosition;
@@ -56,21 +56,23 @@ vec3 raytraceScreen(vec3 screenPosition, vec3 localNormal) {
     result += refinementDirection * (((result.z - localQuery.z) <= 0.0) ? -1.0 : 1.0);
     refinementDirection /= 2.0;
   }
-
   return vec3(localToScreen(result).xy, (length(result) > 0.0) ? 1.0 : 0.0);
+}
+int getBlockId(sampler2D tex, vec2 coords) {
+  return int(texture2D(tex, coords).r * 255.0 + 0.5);
 }
 
 /* DRAWBUFFERS:0 */
 layout(location = 0) out vec4 pixel;
 
 void main() {
-    bool watermask = texture2D(colortex2, textureCoordinates).r == 1.0;
+    float blockID = texture2D(colortex5, textureCoordinates).r;
     vec3  color       = texture2D(gcolor, textureCoordinates).rgb;
     vec3  worldNormal = texture2D(gnormal, textureCoordinates).xyz * 2.0 - 1.0;
     float depth       = texture2D(depthtex0, textureCoordinates).g;
-    if (distance(vec3(-1.0), worldNormal) > 0.0 && watermask) {
+    if (blockID > 0.001) { // your mask is greater than 0.001 so > is correct not <
         vec3 rt = raytraceScreen(vec3(textureCoordinates, depth), normalize(mat3(gbufferModelView) * worldNormal));
-        color   = mix(color, texture2D(gcolor, rt.xy).rgb, rt.z * 0.75);
+        color   = mix(color, texture2D(gcolor, rt.xy).rgb, rt.z * 0.5);
     }
     pixel = vec4(color, 1.0);
     // pixel = vec4(mat3(gbufferModelView) * worldNormal, 1.0);

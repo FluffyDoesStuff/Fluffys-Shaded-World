@@ -5,14 +5,14 @@ out vec2 lightmapCoordinates;
 out vec4 glColor;
 out vec3 N;
 attribute vec3 mc_Entity;
-out vec3 mcEntity;
+out vec3 Entity;
 varying vec4 Color;
 varying vec2 TexCoords;
 
 uniform mat4 gbufferModelViewInverse;
 
 void main() {
-  mcEntity = mc_Entity.xyz;
+  Entity = mc_Entity.xyz;
   TexCoords = gl_MultiTexCoord0.st;
   Color = gl_Color;
   gl_Position         = ftransform();

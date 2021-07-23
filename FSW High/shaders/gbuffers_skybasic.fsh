@@ -6,6 +6,7 @@ uniform mat4 gbufferModelView;
 uniform mat4 gbufferProjectionInverse;
 uniform vec3 fogColor;
 uniform vec3 skyColor;
+uniform float rainStrength;
 
 varying vec4 starData; //rgb = star color, a = flag for weather or not this pixel is a star.
 
