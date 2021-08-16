@@ -5,6 +5,9 @@ varying vec2 LightmapCoords;
 varying vec3 Normal;
 varying vec4 Color;
 
+varying vec3 Entity;
+
+
 #define WAVING		//enable waving block
 
 const float PI = 3.1415927;
@@ -71,6 +74,7 @@ vec3 calcWaterMove(in vec3 pos)
 }
 
 void main() {
+	Entity = mc_Entity.xyz;
     // Transform the vertex
     gl_Position = ftransform();
     // Assign values to varying variables
