@@ -10,6 +10,9 @@ value.shadowMapResolution.16384 = §4§l⚠ WARNING ⚠ §rONLY FOR §n§oHIGH E
 
 option.WAVING = Waving Foliage
 
-option.viewOutput = Map
-value.viewOutput.colortex0 = Normal View
+option.viewOutput = View
+value.viewOutput.colortex0 = Default
 value.viewOutput.shadowcolor0 = Shadow Map
+value.viewOutput.colortex7 = Glow
+value.viewOutput.colortex5 = Water Mask
+value.viewOutput.colortex2 = Light Map

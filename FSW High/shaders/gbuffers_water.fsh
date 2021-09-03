@@ -7,7 +7,10 @@ in vec3 N;
 in vec3 Entity;
 varying vec4 Color;
 varying vec2 TexCoords;
-
+uniform vec3 skyColor;
+uniform vec3 fogColor;
+uniform float wetness;
+uniform float rainStrength;
 
 uniform sampler2D texture;
 uniform sampler2D lightmap;
@@ -24,4 +27,5 @@ void main() {
     gl_FragData[1] = vec4((N + 1.0) / 2.0, 1.0);
     gl_FragData[1] = vec4(1.0);
   }
+  //gl_FragData[0] = vec4(Albedo);
 }

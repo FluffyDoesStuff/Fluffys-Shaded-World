@@ -32,7 +32,7 @@ const float sunPathRotation = -40.0f;
 const int shadowMapResolution = 1024; //[128 256 512 1024 2048 4096 8192 16384]
 const int noiseTextureResolution = 64;
 
-const float Ambient = 0.3f;
+const float Ambient = 0.1f;
 
 float AdjustLightmapTorch(in float torch) {
     const float K = 2.0f;

@@ -11,6 +11,12 @@ uniform mat4 gbufferProjection;
 uniform mat4 gbufferProjectionInverse;
 uniform mat4 gbufferModelView;
 uniform mat4 gbufferModelViewInverse;
+uniform vec3 skyColor;
+uniform vec3 fogColor;
+uniform float wetness;
+uniform float rainStrength;
+
+uniform int isEyeInWater;
 
 vec3 localToScreen(vec3 pos) {
   vec3 data = mat3(gbufferProjection) * pos;
@@ -37,8 +43,6 @@ vec3 raytraceScreen(vec3 screenPosition, vec3 localNormal) {
     vec3 currentPosition = mix(startPosition, endPosition, pow(currentStep, 1.0));
     vec3 screenQuery     = localToScreen(currentPosition);
     vec3 localQuery      = screenToLocal(vec3(screenQuery.xy, texture2D(depthtex0, screenQuery.xy)));
-    if (screenQuery.xy != clamp(screenQuery.xy, vec2(0.0), vec2(1.0)))
-    break;
 
     if ((currentPosition.z - localQuery.z) <= 0.0) {
       result = currentPosition;
@@ -51,12 +55,20 @@ vec3 raytraceScreen(vec3 screenPosition, vec3 localNormal) {
     vec3 screenQuery = localToScreen(result);
     vec3 localQuery  = screenToLocal(vec3(screenQuery.xy, texture2D(depthtex0, screenQuery.xy)));
     if (screenQuery.x < 0.0 || screenQuery.y < 0.0 || screenQuery.x > 1.0 || screenQuery.y > 1.0)
-      break;
+    break;
 
     result += refinementDirection * (((result.z - localQuery.z) <= 0.0) ? -1.0 : 1.0);
     refinementDirection /= 2.0;
+    float rainCoefficient = max(rainStrength, wetness);
+    vec3 skyclr = mix(skyColor, fogColor * 0.65, rainCoefficient);
+    if (screenQuery.xy != clamp(screenQuery.xy, vec2(0.0), vec2(1.0))){;
+      return vec3(0);
+    }else if(abs(isEyeInWater) > 0.001){
+        return vec3(0);
+    } else{
+      return vec3(localToScreen(result).xy, (length(result) > 0.0) ? 1.0 : 0.0);
+    }
   }
-  return vec3(localToScreen(result).xy, (length(result) > 0.0) ? 1.0 : 0.0);
 }
 int getBlockId(sampler2D tex, vec2 coords) {
   return int(texture2D(tex, coords).r * 255.0 + 0.5);

@@ -8,8 +8,9 @@ varying vec2 TexCoords;
 varying vec4 glcolor;
 uniform sampler2D colortex0;
 uniform sampler2D colortex7;
+uniform sampler2D colortex9;
 
 void main() {
     /* DRAWBUFFERS:0 */
-	gl_FragData[0] = texture2D(colortex0, TexCoords) + texture2D(colortex7, TexCoords);
+	gl_FragData[0] = texture2D(colortex0, TexCoords) + texture2D(colortex7, TexCoords) + texture2D(colortex9, TexCoords);
 }

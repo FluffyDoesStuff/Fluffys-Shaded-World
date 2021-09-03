@@ -53,8 +53,8 @@ void main()
     vec3 color = texture2D(colortex8, uv).xyz;
     
     //Blur
-    color = gaussian(colortex8, vec2(0.0, 1.0), screen_res, uv).xyz;
+    color = gaussian(colortex8, vec2(0.0, 2.0), screen_res, uv).xyz;
     
-    /*DRAWBUFFERS:07*/
+    /*DRAWBUFFERS:09*/
     gl_FragData[1] = vec4(color, 1.0);
 }

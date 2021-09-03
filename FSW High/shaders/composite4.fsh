@@ -1,6 +1,8 @@
 #version 120
 
 uniform float viewHeight, viewWidth;
+in vec2 TexCoords;
+varying vec4 Color;
 uniform sampler2D colortex8; //Change if needed
 const float[] KERNEL = float[](
   0.0024055085674964125,
@@ -53,7 +55,7 @@ void main()
     vec3 color = texture2D(colortex8, uv).xyz;
     
     //Blur
-    color = gaussian(colortex8, vec2(1.0, 0.0), screen_res, uv).xyz;
+    color = gaussian(colortex8, vec2(2.0, 0.0), screen_res, uv).xyz;
     
     /*DRAWBUFFERS:07*/
     gl_FragData[1] = vec4(color, 1.0);
