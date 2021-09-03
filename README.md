@@ -1,4 +1,4 @@
-<h1>Fluffy's Shaded World HIGH</h1>
+<h1>Fluffy's Shaded World</h1>
 
 <strong>THIS IS NOT A RAY-TRACED SHADER</strong>
 
