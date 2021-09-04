@@ -1,2 +1,0 @@
-#Thu Aug 26 17:44:11 EDT 2021
-shadowMapResolution=4096

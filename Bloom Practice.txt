@@ -1,2 +1,0 @@
-#Wed Aug 18 13:30:06 EDT 2021
-viewOutput=colortex7

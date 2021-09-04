@@ -24,9 +24,7 @@ void main(){
     {
         gl_FragData[3] = texture2D(colortex7, TexCoords);
     }
-    if(!(abs(Entity.x - 1100) < 0.001)){
-        gl_FragData[1] = vec4(Normal * 0.5f + 0.5f, 1.0f);
-        gl_FragData[2] = vec4(LightmapCoords, 0.0f, 1.0f);
-    }
+    gl_FragData[1] = vec4(Normal * 0.5f + 0.5f, 1.0f);
+    gl_FragData[2] = vec4(LightmapCoords, 0.0f, 1.0f);
     gl_FragData[0] = vec4(Albedo);
 }
