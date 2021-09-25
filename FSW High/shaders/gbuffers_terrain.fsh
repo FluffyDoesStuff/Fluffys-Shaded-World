@@ -11,7 +11,7 @@ uniform sampler2D colortex7;
 // The texture atlas
 uniform sampler2D texture;
 
-float bloomThreshold = 0.8;
+float bloomThreshold = 0.7;
 
 void main(){
     // Sample from texture atlas and account for biome color + ambien occlusion

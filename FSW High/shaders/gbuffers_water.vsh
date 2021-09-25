@@ -11,7 +11,6 @@ varying vec2 TexCoords;
 
 uniform mat4 gbufferModelViewInverse;
 
-
 void main() {
   Entity = mc_Entity.xyz;
   TexCoords = gl_MultiTexCoord0.st;

@@ -1,0 +1,8 @@
+Whats new?
+
+- Out of pre-release!
+- Remade Gaussian Blur
+- Lower Bloom Threshold
+- Blur size effect in shaders settings
+- Small tweaks
+- This file
