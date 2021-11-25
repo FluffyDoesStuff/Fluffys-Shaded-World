@@ -25,6 +25,7 @@ varying vec3 binormal;
 varying vec3 viewVector;
 varying float dist;
 varying float islava;
+varying vec3 N;
 
 attribute vec4 mc_Entity;
 attribute vec4 mc_midTexCoord;
@@ -74,6 +75,7 @@ vec3 calcWaterMove(in vec3 pos)
 }
 
 void main() {
+	N                   = mat3(gbufferModelViewInverse) * normalize(gl_NormalMatrix * gl_Normal);
 	Entity = mc_Entity.xyz;
     // Transform the vertex
     gl_Position = ftransform();

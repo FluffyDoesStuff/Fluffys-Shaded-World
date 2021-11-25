@@ -82,10 +82,10 @@ void main() {
     vec3  color       = texture2D(gcolor, textureCoordinates).rgb;
     vec3  worldNormal = texture2D(gnormal, textureCoordinates).xyz * 2.0 - 1.0;
     float depth       = texture2D(depthtex0, textureCoordinates).g;
-    if (blockID > 0.001) { // your mask is greater than 0.001 so > is correct not <
-        vec3 rt = raytraceScreen(vec3(textureCoordinates, depth), normalize(mat3(gbufferModelView) * worldNormal));
-        color   = mix(color, texture2D(gcolor, rt.xy).rgb, rt.z * 0.5);
-    }
+    //if (blockID > 0.001) { // your mask is greater than 0.001 so > is correct not <
+    //    vec3 rt = raytraceScreen(vec3(textureCoordinates, depth), normalize(mat3(gbufferModelView) * worldNormal));
+    //    color   = mix(color, texture2D(gcolor, rt.xy).rgb, rt.z * 1.0);
+    //}
     pixel = vec4(color, 1.0);
     // pixel = vec4(mat3(gbufferModelView) * worldNormal, 1.0);
 }

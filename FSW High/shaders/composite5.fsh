@@ -1,5 +1,5 @@
 #version 130
-#define FOG_DENSITY 0.0006 
+#define FOG_DENSITY 0.0006871 
 #define WATER_FOG_DENSITY 0.03
 
 varying vec2 texcoord;
